@@ -160,7 +160,7 @@ codec_v2="-c:v:2 $COMMON_X264_PARAMS \
 
 # Run ffmpeg and pipe the output to moq-pub
 
-if [ "$mode" = "multi" ]; then
+if [ "$mode" == "multi" ]; then
 	#Creates 3 video tracks simulating realtime live stream and an audio track with server clock
 	#overlayed at top left corner and video resolution-bitrate overlayed at bottom right corner
 
@@ -181,6 +181,6 @@ else
 		-i "$INPUT" \
 		-c copy \
 		-f mp4 -movflags cmaf+separate_moof+delay_moov+skip_trailer+frag_every_frame \
-		- | cargo run --bin moq-pub -- --name "$NAME" "$URL" "$@"
+		- | cargo run --bin moq-pub -- --name "$NAME" "$URL"
 
 fi
